@@ -9,6 +9,10 @@ var leetcodeUser = new Schema({
     type: String,
     default: "",
   },
+  name: {
+    type: String,
+    default: '',
+  },
   finishedContests: {
     type: String,
     default: "",
@@ -30,18 +34,10 @@ var leetcodeUser = new Schema({
     default: "",
   },
   recentSubmission: {
-    type: String,
-    default: "",
+    type: Array,
+    default: '',
   },
-  global_ranking: {
-    type: String,
-    default: "",
-  },
-  country_ranking: {
-    type: String,
-    unique: true,
-  },
-  success: {
+success: {
     type: Boolean,
     default: false,
   },
