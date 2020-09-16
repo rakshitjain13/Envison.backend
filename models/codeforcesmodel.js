@@ -1,0 +1,29 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var codeforcesUser = new Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  name: {
+    type: String,
+    default: '',
+  },
+  username: {
+    type: String,
+    default: '',
+  },
+  rating: {
+    type: String,
+    default: '',
+  },
+  rating_stage: {
+    type: String,
+    default: '',
+  },
+  allcontests: {
+    type: Array,
+    unique: true,
+  },
+});
+module.exports = mongoose.model('codeforcesUser', codeforcesUser);
