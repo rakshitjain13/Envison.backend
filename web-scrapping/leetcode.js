@@ -27,10 +27,20 @@ var leetcodescrap = async () => {
       '#base_content > div > div > div.col-sm-7.col-md-8 > div:nth-child(1) > div.panel-heading > h3'
     ).innerText,
 
-    recentSubmission: document.querySelector(
-      '#base_content > div > div > div.col-sm-7.col-md-8 > div:nth-child(3) > ul'
-    ).innerText,
+    recentSubmission: document
+      .querySelector(
+        '#base_content > div > div > div.col-sm-7.col-md-8 > div:nth-child(3) > ul'
+      )
+      .innerText.split('\n'),
   }));
+  i = 0;
+  var list = [];
+  for (i = 2; i < leetcodeUser.recentSubmission.length; i += 3) {
+    list.push(leetcodeUser.recentSubmission[i]);
+  }
+  leetcodeUser.recentSubmission = list;
+
+  return leetcodeUser;
 
   await browser.close();
 };

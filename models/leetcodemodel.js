@@ -5,6 +5,10 @@ var leetcodeUser = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
   },
+  name: {
+    type: String,
+    default: '',
+  },
   finishedContests: {
     type: String,
     default: '',
@@ -26,16 +30,8 @@ var leetcodeUser = new Schema({
     default: '',
   },
   recentSubmission: {
-    type: String,
+    type: Array,
     default: '',
-  },
-  global_ranking: {
-    type: String,
-    default: '',
-  },
-  country_ranking: {
-    type: String,
-    unique: true,
   },
 });
 module.exports = mongoose.model('leetcodeUser', leetcodeUser);

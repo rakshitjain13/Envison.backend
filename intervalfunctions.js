@@ -72,19 +72,20 @@ var scrapmain = () => {
           if (err) {
             console.log(err);
           } else {
-            if (leetcodeobj.name) foundccuser.name = codechefobj.name;
-            if (codechefobj.username)
-              foundccuser.username = codechefobj.username;
-            if (leetcodeobj.star) foundccuser.star = codechefobj.star;
-            if (leetcodeobj.rating) foundccuser.rating = codechefobj.rating;
-            if (leetcodeobj.all_rating)
-              foundccuser.all_rating = codechefobj.all_rating;
-            if (leetcodeobj.highest_rating)
-              foundccuser.highest_rating = codechefobj.highest_rating;
-            if (leetcodeobj.global_ranking)
-              foundccuser.global_ranking = codechefobj.global_ranking;
-            if (leetcodeobj.country_ranking)
-              foundccuser.country_ranking = codechefobj.country_ranking;
+            if (leetcodeobj.name) foundlcuser.name = leetcodeobj.name;
+            if (leetcodeobj.finishedContests)
+              foundlcuser.finishedContests = leetcodeobj.finishedContests;
+            if (leetcodeobj.solvedQuestions)
+              foundlcuser.solvedQuestions = leetcodeobj.solvedQuestions;
+            if (leetcodeobj.acceptedSubmissions)
+              foundlcuser.acceptedSubmissions = leetcodeobj.acceptedSubmissions;
+            if (leetcodeobj.acceptanceRate)
+              foundlcuser.acceptanceRate = leetcodeobj.acceptanceRate;
+            if (leetcodeobj.submissionsInLastYear)
+              foundlcuser.submissionsInLastYear =
+                leetcodeobj.submissionsInLastYear;
+            if (leetcodeobj.recentSubmission)
+              foundccuser.recentSubmission = leetcodeobj.recentSubmission;
           }
         });
       }
