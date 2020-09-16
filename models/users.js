@@ -1,7 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var User = new Schema({
-
   firstname: {
     type: String,
     default: "",
@@ -22,18 +21,32 @@ var User = new Schema({
     type: String,
     default: "",
   },
+  codechef_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "codechefUser",
+  },
   codeforces_handle: {
     type: String,
     default: "",
+  },
+  codeforces_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "codeforcesUser",
   },
   leetcode_handle: {
     type: String,
     default: "",
   },
-  envision_handle:{
-    type:String,
-    unique:true,
+  leetcode_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "leetcodeUser",
+  },
+  envision_handle: {
+    type: String,
+    unique: true,
   },
   googleId: String,
+},{
+  timestamps:true
 });
 module.exports = mongoose.model("User", User);

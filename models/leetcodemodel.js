@@ -3,39 +3,47 @@ var Schema = mongoose.Schema;
 var leetcodeUser = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
+  },
+  username: {
+    type: String,
+    default: "",
   },
   finishedContests: {
     type: String,
-    default: '',
+    default: "",
   },
   solvedQuestions: {
     type: String,
-    default: '',
+    default: "",
   },
   acceptedSubmissions: {
     type: String,
-    default: '',
+    default: "",
   },
   acceptanceRate: {
     type: String,
-    default: '',
+    default: "",
   },
   submissionsInLastYear: {
     type: String,
-    default: '',
+    default: "",
   },
   recentSubmission: {
     type: String,
-    default: '',
+    default: "",
   },
   global_ranking: {
     type: String,
-    default: '',
+    default: "",
   },
   country_ranking: {
     type: String,
     unique: true,
+  },
+  success: {
+    type: Boolean,
+    default: false,
   },
 });
 module.exports = mongoose.model('leetcodeUser', leetcodeUser);

@@ -3,27 +3,31 @@ var Schema = mongoose.Schema;
 var codeforcesUser = new Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   name: {
     type: String,
-    default: '',
+    default: "",
   },
   username: {
     type: String,
-    default: '',
+    default: "",
   },
   rating: {
     type: String,
-    default: '',
+    default: "",
   },
   rating_stage: {
     type: String,
-    default: '',
+    default: "",
   },
   allcontests: {
     type: Array,
     unique: true,
+  },
+  success: {
+    type: Boolean,
+    default: false,
   },
 });
 module.exports = mongoose.model('codeforcesUser', codeforcesUser);
