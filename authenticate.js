@@ -3,7 +3,7 @@ var User = require("./models/users");
 var JwtStrategy = require("passport-jwt").Strategy;
 var ExtractJwt = require("passport-jwt").ExtractJwt;
 var jwt = require("jsonwebtoken"); // used to create, sign, and verify tokens
-var GooglePlusTokenStrategy = require("passport-google-plus-token");
+var GooglePlusTokenStrategy = require("passport-google-oauth20").Strategy;
 // var FacebookTokenStrategy = require("passport-facebook-token");
 
 var config = require("./config.js");
@@ -34,11 +34,11 @@ exports.jwtPassport = passport.use(
 
 exports.verifyUser = passport.authenticate("jwt", { session: false });
 exports.googlePassport = passport.use(
-  "googleToken",
   new GooglePlusTokenStrategy(
     {
       clientID: config.google.clientId,
       clientSecret: config.google.clientSecret,
+      callbackURL: "http://localhost:3000/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ googleId: profile.id }, (err, user) => {
@@ -52,8 +52,8 @@ exports.googlePassport = passport.use(
           user.googleId = profile.id;
           user.firstname = profile.name.givenName;
           user.lastname = profile.name.familyName;
-          user.displayname=profile.displayName;
-          user.email=profile.emails[0].value;
+          user.displayname = profile.displayName;
+          user.email = profile.emails[0].value;
           user.save((err, user) => {
             if (err) return done(err, false);
             else return done(null, user);

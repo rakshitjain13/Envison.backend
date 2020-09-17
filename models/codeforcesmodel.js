@@ -1,14 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var codeforcesUser = new Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  name: {
-    type: String,
-    default: "",
-  },
   username: {
     type: String,
     default: "",
