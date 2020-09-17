@@ -1,10 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var leetcodeUser = new Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
   username: {
     type: String,
     default: "",

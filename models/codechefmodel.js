@@ -1,10 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var codechefUser = new Schema({
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-  },
   name: {
     type: String,
     default: '',
