@@ -21,8 +21,8 @@ var leetcodescrap = async () => {
             )
             .innerText.split("\n");
           var list = [];
-          for (let i = 2; i < leetcodeUser.recentSubmission.length; i += 3) {
-            list.push(leetcodeUser.recentSubmission[i]);
+          for (let i = 2; i < recentSubmission.length; i += 3) {
+            list.push(recentSubmission[i]);
           }
           recentSubmission = list;
         }
@@ -63,3 +63,4 @@ var leetcodescrap = async () => {
   return leetcodeUser;
 };
 module.exports = leetcodescrap;
+
