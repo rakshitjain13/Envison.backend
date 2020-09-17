@@ -17,7 +17,7 @@ var codechefUser = new Schema({
     type: String,
     default: '',
   },
-  all_rating: {
+  allcontests: {
     type: String,
     default: '',
   },
