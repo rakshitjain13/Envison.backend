@@ -13,7 +13,7 @@ router.use(bodyParser.json());
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
-route.get('/:envision_handle', (req, res, next) => {
+router.get('/:envision_handle', (req, res, next) => {
   User.find({ envision_handle: req.params.envision_handle })
     .populate('codechef_id')
     .populate('codeforces_id')

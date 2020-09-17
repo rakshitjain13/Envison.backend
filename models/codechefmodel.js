@@ -5,10 +5,6 @@ var codechefUser = new Schema({
     type: String,
     default: '',
   },
-  username: {
-    type: String,
-    default: '',
-  },
   star: {
     type: String,
     default: '',
@@ -18,7 +14,7 @@ var codechefUser = new Schema({
     default: '',
   },
   allcontests: {
-    type: String,
+    type: Array,
     default: '',
   },
   hightest_rating: {
@@ -33,9 +29,9 @@ var codechefUser = new Schema({
     type: String,
     unique: true,
   },
-  success:{
-    type:Boolean,
-    default:false
-  }
+  success: {
+    type: Boolean,
+    default: false,
+  },
 });
 module.exports = mongoose.model('codechefUser', codechefUser);
