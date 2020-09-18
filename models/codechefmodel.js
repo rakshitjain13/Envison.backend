@@ -3,39 +3,39 @@ var Schema = mongoose.Schema;
 var codechefUser = new Schema({
   name: {
     type: String,
-    default: '',
+    default: "",
   },
   username: {
     type: String,
-    default: '',
+    default: "",
   },
   star: {
     type: String,
-    default: '',
+    default: "",
   },
   rating: {
     type: String,
-    default: '',
+    default: "",
   },
   allcontests: {
-    type: String,
-    default: '',
+    type: Array,
+    default: "",
   },
   hightest_rating: {
     type: String,
-    default: '',
+    default: "",
   },
   global_ranking: {
     type: String,
-    default: '',
+    default: "",
   },
   country_ranking: {
     type: String,
     unique: true,
   },
-  success:{
-    type:Boolean,
-    default:false
-  }
+  success: {
+    type: Boolean,
+    default: false,
+  },
 });
 module.exports = mongoose.model('codechefUser', codechefUser);

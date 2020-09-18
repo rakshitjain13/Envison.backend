@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var leetcodeUser = new Schema({
-  username: {
+  name: {
     type: String,
     default: "",
   },
-  name: {
+  username: {
     type: String,
-    default: '',
+    default: "",
   },
   finishedContests: {
     type: String,
@@ -31,9 +31,9 @@ var leetcodeUser = new Schema({
   },
   recentSubmission: {
     type: Array,
-    default: '',
+    default: "",
   },
-success: {
+  success: {
     type: Boolean,
     default: false,
   },

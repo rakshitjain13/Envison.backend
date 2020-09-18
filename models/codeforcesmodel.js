@@ -3,19 +3,19 @@ var Schema = mongoose.Schema;
 var codeforcesUser = new Schema({
   username: {
     type: String,
-    default: "",
+    default: '',
   },
   rating: {
     type: String,
-    default: "",
+    default: '',
   },
   rating_stage: {
     type: String,
-    default: "",
+    default: '',
   },
   allcontests: {
     type: Array,
-    unique: true,
+    default: '',
   },
   success: {
     type: Boolean,
