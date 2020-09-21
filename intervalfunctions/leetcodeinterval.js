@@ -1,5 +1,5 @@
 var leetcodeUser = require('../models/leetcodemodel');
-var leetcodescrap = require('../web-scrapping/codeforces');
+var leetcodescrap = require('../web-scrapping/leetcode');
 
 var updateleet = function () {
   leetcodeUser.find({}).then((lcuserarray) => {

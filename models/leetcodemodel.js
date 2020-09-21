@@ -3,31 +3,35 @@ var Schema = mongoose.Schema;
 var leetcodeUser = new Schema({
   name: {
     type: String,
-    default: '',
+    default: "",
+  },
+  username: {
+    type: String,
+    default: "",
   },
   finishedContests: {
     type: String,
-    default: '',
+    default: "",
   },
   solvedQuestions: {
     type: String,
-    default: '',
+    default: "",
   },
   acceptedSubmissions: {
     type: String,
-    default: '',
+    default: "",
   },
   acceptanceRate: {
     type: String,
-    default: '',
+    default: "",
   },
   submissionsInLastYear: {
     type: String,
-    default: '',
+    default: "",
   },
   recentSubmission: {
     type: Array,
-    default: '',
+    default: "",
   },
   success: {
     type: Boolean,

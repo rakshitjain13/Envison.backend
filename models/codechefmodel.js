@@ -3,27 +3,31 @@ var Schema = mongoose.Schema;
 var codechefUser = new Schema({
   name: {
     type: String,
-    default: '',
+    default: "",
+  },
+  username: {
+    type: String,
+    default: "",
   },
   star: {
     type: String,
-    default: '',
+    default: "",
   },
   rating: {
     type: String,
-    default: '',
+    default: "",
   },
   allcontests: {
     type: Array,
-    default: '',
+    default: "",
   },
   hightest_rating: {
     type: String,
-    default: '',
+    default: "",
   },
   global_ranking: {
     type: String,
-    default: '',
+    default: "",
   },
   country_ranking: {
     type: String,
