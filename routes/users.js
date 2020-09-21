@@ -7,6 +7,9 @@ var codechefUser = require('../models/codechefmodel');
 var codeforcesUser = require('../models/codeforcesmodel');
 var leetcodeUser = require('../models/leetcodemodel');
 var authenticate = require('../authenticate');
+var codechefscrapper=require('../web-scrapping/codechef');
+var codeforcesscrapper=require('../web-scrapping/codeforces');
+var leetcodescrapper = require("../web-scrapping/leetcode");
 router.use(bodyParser.json());
 
 /* GET users listing. */
@@ -49,24 +52,66 @@ router.post("/filldetails", authenticate.verifyUser, (req, res, next) => {
             const codechefuser = new codechefUser();
             codechefuser.username = req.body.codechef_handle;
             user.codechef_id = codechefuser._id;
-            codechefuser.save();
+            codechefscrapper(req.body.codechef_handle).then((codechefobj)=>{
+              if(codechefobj.success){
+                 codechefuser.name = codechefobj.name;
+                 codechefuser.star = codechefobj.star;
+                 codechefuser.rating = codechefobj.rating;
+                 codechefuser.allcontests = codechefobj.allcontests;
+                 codechefuser.highest_rating = codechefobj.highest_rating;
+                 codechefuser.global_ranking = codechefobj.global_ranking;
+                 codechefuser.country_ranking = codechefobj.country_ranking;
+                 codechefuser.success = codechefobj.success;
+              }else{
+                codechefuser.success=false;
+              }
+               codechefuser.save().then(obj=>console.log(obj));
+            })
           }
           if (req.body.codeforces_handle != null) {
             const codeforcesuser = new codeforcesUser();
             codeforcesuser.username = req.body.codeforces_handle;
             user.codeforces_id = codeforcesuser._id;
-            codeforcesuser.save();
+            codeforcesscrapper(req.body.codeforces_handle).then(
+              (codeforcesobj) => {
+                if (codeforcesobj.success) {
+                  codeforcesuser.rating = codeforcesobj.rating;
+                  codeforcesuser.rating_stage = codeforcesobj.rating_stage;
+                  codeforcesuser.allcontests = codeforcesobj.allcontests;
+                  codeforcesuser.success = true;
+                } else {
+                  codeforcesuser.success = false;
+                }
+                codeforcesuser.save().then(obj=>console.log(obj));
+              }
+            );
           }
           if (req.body.leetcode_handle != null) {
             const leetcodeuser = new leetcodeUser();
             leetcodeuser.username = req.body.leetcode_handle;
             user.leetcode_id = leetcodeuser._id;
-            leetcodeuser.save();
+             leetcodescrapper(req.body.leetcode_handle).then((leetcodeobj) => {
+               if (leetcodeobj.success) {
+                 leetcodeuser.name = leetcodeobj.name;
+                 leetcodeuser.finishedContests = leetcodeobj.finishedContests;
+                 leetcodeuser.solvedQuestions = leetcodeobj.solvedQuestions;
+                 leetcodeuser.acceptedSubmissions = leetcodeobj.acceptedSubmissions;
+                 leetcodeuser.acceptanceRate = leetcodeobj.acceptanceRate;
+                 leetcodeuser.submissionsInLastYear =
+                   leetcodeobj.submissionsInLastYear;
+                 leetcodeuser.recentSubmission = leetcodeobj.recentSubmission;
+                 leetcodeuser.success = leetcodeobj.success;
+               } else {
+                 leetcodeuser.success = leetcodeobj.success;
+               }
+                 leetcodeuser.save().then((obj) => console.log(obj));
+             });
           }
           user.save().then((updated_user) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');
             res.json(updated_user);
+
           });
         } else {
           err = new Error('User not found');

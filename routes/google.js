@@ -12,7 +12,7 @@ router.use(bodyParser.json());
 
 router.get(
   "/signin",
-  passport.authenticate("google", {session:false,scope: ["profile", "email"] ,session:false})
+  passport.authenticate("google", {session:false,scope: ["profile", "email"]})
 );
 router.get(
   "/callback",
