@@ -26,9 +26,9 @@ const connect = mongoose.connect(url, {
 connect.then(
   (db) => {
     console.log('Connected correctly to server');
-    updatecc();
-    updatecf();
-    updateleet();
+    // updatecc();
+    // updatecf();
+    // updateleet();
   },
   (err) => {
     console.log(err);
