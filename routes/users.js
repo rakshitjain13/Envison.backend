@@ -13,25 +13,28 @@ router.use(bodyParser.json());
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
-router.get('/:envision_handle',(req,res,next)=>{
-  User.find({envision_handle:req.params.envision_handle})
-  .populate("codechef_id")
-  .populate("codeforces_id")
-  .populate("leetcode_id")
-  .then((user)=>{
-      if(user){
-      res.statusCode=200;
-      res.setHeader("Content-Type", "application/json");
-      res.json(user);
-      }else{
-         err = new Error("User not found");
-         err.status = 404;
-         return next(err);
-      }
-  },((err)=>next(err)))
-  .catch((err)=>next(err))
-})
-router.post("/filldetails", authenticate.verifyUser, (req, res, next) => {
+router.get('/:envision_handle', (req, res, next) => {
+  User.find({ envision_handle: req.params.envision_handle })
+    .populate('codechef_id')
+    .populate('codeforces_id')
+    .populate('leetcode_id')
+    .then(
+      (user) => {
+        if (user) {
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+          res.json(user);
+        } else {
+          err = new Error('User not found');
+          err.status = 404;
+          return next(err);
+        }
+      },
+      (err) => next(err)
+    )
+    .catch((err) => next(err));
+});
+router.post('/filldetails', authenticate.verifyUser, (req, res, next) => {
   User.findById(req.user._id)
     .then(
       (user) => {
@@ -63,6 +66,7 @@ router.post("/filldetails", authenticate.verifyUser, (req, res, next) => {
             user.leetcode_id = leetcodeuser._id;
             leetcodeuser.save();
           }
+
           user.save().then((updated_user) => {
             res.statusCode = 200;
             res.setHeader('Content-Type', 'application/json');

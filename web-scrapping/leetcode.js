@@ -63,4 +63,3 @@ var leetcodescrap = async (lcuser) => {
   return leetcodeUser;
 };
 module.exports = leetcodescrap;
-
