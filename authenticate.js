@@ -48,8 +48,8 @@ exports.googlePassport = passport.use(
         if (!err && user !== null) {
           return done(null, user);
         } else {
-          user = new User({ username: profile.displayName });
-          user.googleId = profile.id;
+          user = new User({  googleId :profile.id });
+          user.username=profile.displayName;
           user.firstname = profile.name.givenName;
           user.lastname = profile.name.familyName;
           user.displayname = profile.displayName;
