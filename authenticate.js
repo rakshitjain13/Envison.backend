@@ -41,17 +41,14 @@ exports.googlePassport = passport.use(
       callbackURL: "http://localhost:3000/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }, (err, user) => {
+      User.findOne({ username: profile.id }, (err, user) => {
         if (err) {
           return done(err, false);
         }
         if (!err && user !== null) {
           return done(null, user);
         } else {
-          user = new User({  googleId :profile.id });
-          user.username=profile.displayName;
-          user.firstname = profile.name.givenName;
-          user.lastname = profile.name.familyName;
+          user = new User({  username :profile.id });
           user.displayname = profile.displayName;
           user.email = profile.emails[0].value;
           user.save((err, user) => {

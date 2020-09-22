@@ -1,55 +1,47 @@
+
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var User = new Schema(
-  {
-    firstname: {
+var User = new Schema({
+  displayname: {
+    type: String,
+    default:""
+  },
+    envision_handle: {
       type: String,
-      default: '',
-    },
-    lastname: {
-      type: String,
-      default: '',
+      unique:false
     },
     email: {
       type: String,
-      default: '',
-    },
-    username: {
-      type: String,
-      default: '',
+      unique:true
     },
     codechef_handle: {
       type: String,
-      default: '',
+      default: "",
     },
     codechef_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'codechefUser',
+      ref: "codechefUser",
     },
     codeforces_handle: {
       type: String,
-      default: '',
+      default: "",
     },
     codeforces_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'codeforcesUser',
+      ref: "codeforcesUser",
     },
     leetcode_handle: {
       type: String,
-      default: '',
+      default: "",
     },
     leetcode_id: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'leetcodeUser',
+      ref: "leetcodeUser",
     },
-    envision_handle: {
-      type: String,
-      unique: true,
-    },
-    googleId: String,
-  },
-  {
-    timestamps: true,
-  }
-);
-module.exports = mongoose.model('User', User);
+    username:{
+      type:String,
+      unique:true
+    }
+
+});
+module.exports = mongoose.model("User", User);
