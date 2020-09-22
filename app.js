@@ -14,13 +14,8 @@ var googleRouter = require('./routes/google');
 var updatecc = require('./intervalfunctions/codechefinterval');
 var updatecf = require('./intervalfunctions/codeforcesinterval');
 var updateleet = require('./intervalfunctions/leetcodeinterval');
-var testcc = require('./web-scrapping/leetcode');
 var updateallcontests = require('./intervalfunctions/currentContests');
 
-//helper function
-var contestinitial = require('./allcontesthelper');
-
-var clistscrap = require('./web-scrapping/AllContests');
 
 var app = express();
 const url = config.mongoUrl;
@@ -32,15 +27,14 @@ const connect = mongoose.connect(url, {
 connect.then(
   (db) => {
     console.log('Connected correctly to server');
-    contestinitial();
     updateallcontests();
     setInterval(updateallcontests, 1800000);
     updatecc();
-    setInterval(updatecc, 1800000);
+    setInterval(updatecc, 180000);
     updatecf();
-    setInterval(updatecf, 1800000);
+    setInterval(updatecf, 180000);
     updateleet();
-    setInterval(updateleet, 1800000);
+    setInterval(updateleet, 180000);
   },
   (err) => {
     console.log(err);

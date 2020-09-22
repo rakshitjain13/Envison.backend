@@ -18,10 +18,7 @@ var clistscrap = async () => {
       for (var i = 0; i < arr.length; i++) {
         var te = JSON.parse(arr[i].dataset['ace']);
         if (
-          te.location == 'codechef.com' ||
-          te.location == 'codeforces.com' ||
-          te.location == 'leetcode.com'
-        )
+          te.location == 'codechef.com' || te.location == 'codeforces.com' ||  te.location == 'leetcode.com')
           li.push(te);
       }
       return { currcontests: li, success: true };
