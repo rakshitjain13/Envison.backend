@@ -12,14 +12,10 @@ var updatecf = function () {
           cfuser.success = true;
           cfuser
             .save()
-            .then((user) => console.log(user))
-            .catch((err) => console.log(err));
         } else {
           cfuser.success = false;
           cfuser
             .save()
-            .then((user) => console.log(user))
-            .catch((err) => console.log(err));
         }
       });
     });

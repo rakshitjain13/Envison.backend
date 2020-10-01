@@ -14,11 +14,11 @@ var updatecc = async () => {
           ccuser.global_ranking = codechefobj.global_ranking;
           ccuser.country_ranking = codechefobj.country_ranking;
           ccuser.success = codechefobj.success;
-          console.log(ccuser);
+        
           ccuser.save();
         } else {
           ccuser.success = codechefobj.success;
-          console.log(ccuser);
+         
           ccuser.save();
         }
       });

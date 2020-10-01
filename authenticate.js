@@ -33,12 +33,13 @@ exports.jwtPassport = passport.use(
 );
 
 exports.verifyUser = passport.authenticate("jwt", { session: false });
+
 exports.googlePassport = passport.use(
   new GooglePlusTokenStrategy(
     {
       clientID: config.google.clientId,
       clientSecret: config.google.clientSecret,
-      callbackURL: "http://localhost:3000/google/callback",
+      callbackURL: "http://localhost:5000/google/callback",
     },
     (accessToken, refreshToken, profile, done) => {
       User.findOne({ username: profile.id }, (err, user) => {

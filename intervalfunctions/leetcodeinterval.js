@@ -14,11 +14,11 @@ var updateleet = function () {
           lcuser.submissionsInLastYear = leetcodeobj.submissionsInLastYear;
           lcuser.recentSubmission = leetcodeobj.recentSubmission;
           lcuser.success = leetcodeobj.success;
-          console.log(leetcodeobj);
+         
           lcuser.save();
         } else {
           lcuser.success = leetcodeobj.success;
-          console.log(lcuser);
+         
           lcuser.save();
         }
       });
