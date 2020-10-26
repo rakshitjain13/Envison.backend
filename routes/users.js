@@ -11,10 +11,16 @@ var codechefscrapper = require('../web-scrapping/codechef');
 var codeforcesscrapper = require('../web-scrapping/codeforces');
 var leetcodescrapper = require('../web-scrapping/leetcode');
 const cors = require("./cors");
+const atcoderUser = require('../models/atcodermodel');
+const atcoderscrap = require('../web-scrapping/atcoder');
 router.use(bodyParser.json());
 
 /* GET users listing. */
 router.route("/")
+  .options(cors.corsWithOptions, (req, res) => {
+    res.sendStatus(200);
+  });
+  router.route("/filldetails")
   .options(cors.corsWithOptions, (req, res) => {
     res.sendStatus(200);
   });
@@ -26,6 +32,7 @@ router.get("/:envision_handle", cors.cors, (req, res, next) => {
     .populate("codechef_id")
     .populate("codeforces_id")
     .populate("leetcode_id")
+    .populate("atcoder_id")
     .then(
       (user) => {
         if (user) {
@@ -50,7 +57,7 @@ router.post(
     User.findById(req.user._id)
       .then(
         (user) => {
-          if (user != null && user.envision_handle == null) {
+          if (user != null ) {
             user.envision_handle = req.body.envision_handle;
             user.codechef_handle =
               req.body.codechef_handle != null ? req.body.codechef_handle : "";
@@ -60,6 +67,10 @@ router.post(
                 : "";
             user.leetcode_handle =
               req.body.leetcode_handle != null ? req.body.leetcode_handle : "";
+            user.atcoder_handle =
+                req.body.atcoder_handle != null
+                  ? req.body.atcoder_handle
+                  : "";
             if (req.body.codechef_handle != null) {
               const codechefuser = new codechefUser();
               codechefuser.username = req.body.codechef_handle;
@@ -120,6 +131,25 @@ router.post(
                 leetcodeuser.save().then((obj) => console.log(obj));
               });
             }
+             if (req.body.atcoder_handle != null) {
+               const atcoderuser = new atcoderUser();
+               atcoderuser.name = req.body.leetcode_handle;
+               user.atcoder_id = atcoderuser._id;
+               atcoderscrap(req.body.atcoder_handle).then(
+                 (atcoderObj) => {
+                   if (atcoderObj.success) {
+                     atcoderuser.name = atcoderObj.name;
+                     atcoderuser.recentSubmission =
+                       atcoderObj.recentSubmission;
+                       atcoderuser.data=atcoderObj.data;
+                     atcoderuser.success = atcoderObj.success;
+                   } else {
+                      atcoderuser.success = atcoderObj.success;
+                   }
+                   atcoderuser.save().then((obj) => console.log(obj));
+                 }
+               );
+             }
             user.save().then((updated_user) => {
               res.statusCode = 200;
               res.setHeader("Content-Type", "application/json");

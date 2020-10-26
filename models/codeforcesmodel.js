@@ -15,6 +15,7 @@ var codeforcesUser = new Schema({
   },
   allcontests: {
     type: Array,
+    unique:false,
     default: '',
   },
   success: {

@@ -29,14 +29,14 @@ const connect = mongoose.connect(url, {
 connect.then(
   (db) => {
     console.log('Connected correctly to server');
-    updateallcontests();
-    setInterval(updateallcontests, 1800000);
-    updatecc();
-    setInterval(updatecc, 180000);
-    updatecf();
-    setInterval(updatecf, 180000);
-    updateleet();
-    setInterval(updateleet, 180000);
+    // updateallcontests();
+    // setInterval(updateallcontests, 1800000);
+    // updatecc();
+    // setInterval(updatecc, 180000);
+    // updatecf();
+    // setInterval(updatecf, 180000);
+    // updateleet();
+    // setInterval(updateleet, 180000);
   },
   (err) => {
     console.log(err);

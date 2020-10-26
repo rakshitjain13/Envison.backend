@@ -37,7 +37,15 @@ var User = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "leetcodeUser",
   },
-  username: {
+  atcoder_handle: {
+    type: String,
+    default: "",
+  },
+  atcoder_id: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "atcoderUser",
+  },
+  googleId: {
     type: String,
     unique: true,
   },
