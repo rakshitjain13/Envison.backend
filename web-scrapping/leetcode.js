@@ -8,46 +8,35 @@ var leetcodescrap = async (lcuser) => {
     await page.goto(`https://leetcode.com/${lcuser}/`);
 
     leetcodeUser = await page.evaluate(() => {
-      if (document.querySelector('.username')) {
+      if (document.querySelector(".username__o7KX")) {
         recentSubmission = [];
         if (
-          document.querySelector(
-            '#base_content > div > div > div.col-sm-7.col-md-8 > div:nth-child(3) > ul'
-          )
+          Array.from(document.querySelectorAll(".ant-list-item.css-nvdml7"))
         ) {
-          recentSubmission = document
-            .querySelector(
-              '#base_content > div > div > div.col-sm-7.col-md-8 > div:nth-child(3) > ul'
-            )
-            .innerText.split('\n');
+          recentSubmission = Array.from(
+            document.querySelectorAll(".ant-list-item.css-nvdml7")
+          );
           var list = [];
-          for (let i = 2; i < recentSubmission.length; i += 3) {
-            list.push(recentSubmission[i]);
+          for (let i = 0; i < recentSubmission.length; i++) {
+            list.push(recentSubmission[i].innerText);
           }
           recentSubmission = list;
         }
 
         return {
-          name: document.querySelector('.username').innerText,
-          finishedContests: document.querySelector(
-            '#base_content > div > div > div.col-sm-5.col-md-4 > div:nth-child(2) > ul > li > span'
-          ).innerText,
-
-          solvedQuestions: document.querySelector(
-            '#base_content > div > div > div.col-sm-5.col-md-4 > div:nth-child(3) > ul > li:nth-child(1) > span'
-          ).innerText,
-
-          acceptedSubmissions: document.querySelector(
-            '#base_content > div > div > div.col-sm-5.col-md-4 > div:nth-child(3) > ul > li:nth-child(2) > span'
-          ).innerText,
+          name: document.querySelector(".username__o7KX").innerText,
+          ranking: document.querySelector(".css-rcx088").innerText,
+          ratings: document.querySelector(".css-181az6d").innerText,
+          solvedQuestions: document.querySelector(".total-solved-count__2El1")
+            .innerText,
 
           acceptanceRate: document.querySelector(
-            '#base_content > div > div > div.col-sm-5.col-md-4 > div:nth-child(3) > ul > li:nth-child(3) > span'
+            ".css-1b3bb7o-PercentNumber.e5i1odf1"
           ).innerText,
 
-          submissionsInLastYear: document.querySelector(
-            '#base_content > div > div > div.col-sm-7.col-md-8 > div:nth-child(1) > div.panel-heading > h3'
-          ).innerText,
+          submissionsInLastYear: document.querySelectorAll(
+            ".ant-card-head-title"
+          )[3].innerText,
 
           recentSubmission,
           success: true,

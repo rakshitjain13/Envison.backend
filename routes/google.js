@@ -19,14 +19,15 @@ router.route("/signin").options(cors.corsWithOptions, (req, res) => {
   router.post("/signin", cors.corsWithOptions, (req, res, next) => {
     var profile = req.body.profileObj;
     console.log(profile);
-    User.findOne({ username: profile.googleId }).then((user) => {
+    User.findOne({ googleId: profile.id }).then((user) => {
       if (user !== null) {
         var token = authenticate.getToken({ _id: user._id });
         res.statusCode=200;
          res.setHeader("Content-Type", "application/json");
          res.json({user,token,success:true});
       } else {
-        user = new User({ username: profile.googleId });
+        user = new User();
+        user.googleId=profile.id;
         user.displayname = profile.name;
         user.email = profile.email;
         user
