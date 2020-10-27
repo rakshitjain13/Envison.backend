@@ -9,15 +9,14 @@ var config = require('./config');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var googleRouter = require('./routes/google');
-var usertestRouter=require('./routes/userhandletest');
+var usertestRouter = require('./routes/userhandletest');
 
 //intervalfunctions
 var updatecc = require('./intervalfunctions/codechefinterval');
 var updatecf = require('./intervalfunctions/codeforcesinterval');
 var updateleet = require('./intervalfunctions/leetcodeinterval');
 var updateallcontests = require('./intervalfunctions/currentContests');
-var User=require('./models/users');
-
+var User = require('./models/users');
 
 var app = express();
 const url = config.mongoUrl;
@@ -56,9 +55,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/google', googleRouter);
-app.use('/handletest',usertestRouter);
-app.use('/usernamecheck',require('./routes/usernamecheck'));
-app.use('/getuser',require('./routes/getuser'));
+app.use('/handletest', usertestRouter);
+app.use('/usernamecheck', require('./routes/usernamecheck'));
+app.use('/getuser', require('./routes/getuser'));
+app.use('/allcontests', require('./routes/allcontest'));
 
 // var intervalfunc = function () {
 
