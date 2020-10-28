@@ -56,7 +56,7 @@ router.post(
   (req, res, next) => {
     User.findById(req.user._id)
       .then(
-        (user) => {
+        async (user) => {
           if (user != null ) {
             user.envision_handle = req.body.envision_handle;
             user.codechef_handle =
@@ -75,7 +75,7 @@ router.post(
               const codechefuser = new codechefUser();
               codechefuser.username = req.body.codechef_handle;
               user.codechef_id = codechefuser._id;
-              codechefscrapper(req.body.codechef_handle).then((codechefobj) => {
+              await codechefscrapper(req.body.codechef_handle).then((codechefobj) => {
                 if (codechefobj.success) {
                   codechefuser.name = codechefobj.name;
                   codechefuser.star = codechefobj.star;
@@ -95,11 +95,13 @@ router.post(
               const codeforcesuser = new codeforcesUser();
               codeforcesuser.username = req.body.codeforces_handle;
               user.codeforces_id = codeforcesuser._id;
-              codeforcesscrapper(req.body.codeforces_handle).then(
+              await codeforcesscrapper(req.body.codeforces_handle).then(
                 (codeforcesobj) => {
                   if (codeforcesobj.success) {
                     codeforcesuser.rating = codeforcesobj.rating;
                     codeforcesuser.rating_stage = codeforcesobj.rating_stage;
+                    codeforcesuser.highest_rating =
+                      codeforcesobj.highest_rating;
                     codeforcesuser.allcontests = codeforcesobj.allcontests;
                     codeforcesuser.success = true;
                   } else {
@@ -133,12 +135,11 @@ router.post(
             }
              if (req.body.atcoder_handle != null) {
                const atcoderuser = new atcoderUser();
-               atcoderuser.name = req.body.leetcode_handle;
+               atcoderuser.name = req.body.atcoder_handle;
                user.atcoder_id = atcoderuser._id;
-               atcoderscrap(req.body.atcoder_handle).then(
+               await atcoderscrap(req.body.atcoder_handle).then(
                  (atcoderObj) => {
                    if (atcoderObj.success) {
-                     atcoderuser.name = atcoderObj.name;
                      atcoderuser.recentSubmission =
                        atcoderObj.recentSubmission;
                        atcoderuser.data=atcoderObj.data;

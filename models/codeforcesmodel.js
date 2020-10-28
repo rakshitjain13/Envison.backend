@@ -3,20 +3,24 @@ var Schema = mongoose.Schema;
 var codeforcesUser = new Schema({
   username: {
     type: String,
-    default: '',
+    default: "",
   },
   rating: {
     type: String,
-    default: '',
+    default: "",
+  },
+  highest_rating: {
+    type: String,
+    default: "",
   },
   rating_stage: {
     type: String,
-    default: '',
+    default: "",
   },
   allcontests: {
     type: Array,
-    unique:false,
-    default: '',
+    unique: false,
+    default: "",
   },
   success: {
     type: Boolean,

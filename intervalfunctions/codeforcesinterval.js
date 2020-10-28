@@ -8,6 +8,7 @@ var updatecf = function () {
         if (codeforcesobj.success) {
           cfuser.rating = codeforcesobj.rating;
           cfuser.rating_stage = codeforcesobj.rating_stage;
+          cfuser.highest_rating = codeforcesobj.highest_rating;
           cfuser.allcontests = codeforcesobj.allcontests;
           cfuser.success = true;
           cfuser

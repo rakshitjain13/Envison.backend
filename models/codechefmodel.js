@@ -21,7 +21,7 @@ var codechefUser = new Schema({
     type: Array,
    
   },
-  hightest_rating: {
+  highest_rating: {
     type: String,
     
   },

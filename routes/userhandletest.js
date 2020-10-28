@@ -11,7 +11,7 @@ router.route("/codechef").options(cors.corsWithOptions, (req, res) => {
 router.route("/codeforces").options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200);
 });
-router.route("/leetcode").options(cors.corsWithOptions, (req, res) => {
+router.route("/atcoder").options(cors.corsWithOptions, (req, res) => {
   res.sendStatus(200);
 });
 router.post("/codechef",cors.corsWithOptions,async (req,res,next)=>{
@@ -31,8 +31,8 @@ router.post("/codeforces",cors.corsWithOptions,async (req,res,next)=>{
    res.json({success:result.success});
 
 });
-router.post("/leetcode", cors.corsWithOptions, async (req, res, next) => {
-   var result = await usertest.leetcodeusertest(req.body.leetcode_handle);
+router.post("/atcoder", cors.corsWithOptions, async (req, res, next) => {
+   var result = await usertest.atcoderusertest(req.body.atcoder_handle);
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/json");
     res.json({ success: result.success });

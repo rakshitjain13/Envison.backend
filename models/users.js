@@ -29,14 +29,6 @@ var User = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "codeforcesUser",
   },
-  leetcode_handle: {
-    type: String,
-    default: "",
-  },
-  leetcode_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "leetcodeUser",
-  },
   atcoder_handle: {
     type: String,
     default: "",
@@ -45,7 +37,7 @@ var User = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "atcoderUser",
   },
-  googleId: {
+  username: {
     type: String,
     unique: true,
   },

@@ -19,15 +19,14 @@ router.route("/signin").options(cors.corsWithOptions, (req, res) => {
   router.post("/signin", cors.corsWithOptions, (req, res, next) => {
     var profile = req.body.profileObj;
     console.log(profile);
-    User.findOne({ googleId: profile.id }).then((user) => {
+    User.findOne({ username: profile.id }).then((user) => {
       if (user !== null) {
         var token = authenticate.getToken({ _id: user._id });
         res.statusCode=200;
          res.setHeader("Content-Type", "application/json");
          res.json({user,token,success:true});
       } else {
-        user = new User();
-        user.googleId=profile.id;
+        user = new User({ username: profile.id });
         user.displayname = profile.name;
         user.email = profile.email;
         user
@@ -42,49 +41,5 @@ router.route("/signin").options(cors.corsWithOptions, (req, res) => {
       }
     }).catch((err)=>next(err))
   });
-// router.get(
-//   "/signin",
-//   cors.cors,
-//   passport.authenticate("google", {session:false,scope: ["profile", "email"]})
-// );
-// router.get(
-//   "/callback",
-//   cors.cors,
-//   passport.authenticate("google", {
-//     session: false,
-//     failureRedirect: "/google/sigin",
-//   }),
-//   (req, res) => {
-//     if (req.user) {
-//       // if (req.user.envision_handle) {
-//       //   var token = authenticate.getToken({ _id: req.user._id });
-//       //   res.statusCode = 200;
-//       //   res.setHeader("Content-Type", "application/json");
-//       //   res.json({
-//       //     success: true,
-//       //     token: token,
-//       //     status: "You are successfully logged in!",
-//       //   });
-//       // } else {
-//       //   var string = encodeURIComponent(JSON.stringify(req.user));
-//       //   res.redirect("http://localhost:5000/test/?user=" + string);
-//       //   res.end();
-//       // }
 
-//       // res.setHeader("Content-Type", "application/json");
-//       // res.json({
-//       //   success: true,
-//       //   user_id: req.user._id,
-//       //   status: "You are successfully logged in!",
-//       // });
-//       // var string = encodeURIComponent(JSON.stringify(req.user.));
-
-//       // res.redirect("http://localhost:3000/loginload/");
-//       // res.end();
-//       res.statusCode = 200;
-//         res.setHeader("Content-Type", "application/json");
-//         res.json(req.user);
-//     }
-//   }
-// );
 module.exports = router;

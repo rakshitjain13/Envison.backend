@@ -46,14 +46,14 @@ exports.codeforcesusertest = async (cfuser) => {
   await browser.close();
   return codeforces_user;
 };
-exports.leetcodeusertest = async (lcuser) => {
+exports.atcoderusertest = async (lcuser) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  var leetcodeUser;
+  var atcoderUser;
   try {
-    await page.goto(`https://leetcode.com/${lcuser}/`);
+    await page.goto(`https://atcoder.jp/users/${lcuser}`);
 
-    leetcodeUser = await page.evaluate(() => {
+     atcoderUser= await page.evaluate(() => {
       if (document.querySelector(".username")) {
         return { success: true};
       } else {
@@ -61,8 +61,8 @@ exports.leetcodeusertest = async (lcuser) => {
       }
     });
   } catch (err) {
-    leetcodeUser = { success: false};
+    atcoderUser = { success: false,err};
   }
   await browser.close();
-  return leetcodeUser;
+  return atcoderUser;
 };

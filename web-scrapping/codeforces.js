@@ -9,10 +9,13 @@ var codeforcesscrap = async (cfuser) => {
     codeforces_user_detais = await page.evaluate(() => {
       if (document.querySelector('.info ul li span')) {
         return {
-          username: Array.from(document.querySelectorAll('a.rated-user'))[45]
+          username: Array.from(document.querySelectorAll("a.rated-user"))[45]
             .innerText,
-          rating: document.querySelector('.info ul li span').innerText,
-          rating_stage: document.querySelector('.user-rank').innerText,
+          rating: document.querySelector(".info ul li span").innerText,
+          highest_rating: document.querySelector(
+            ".info ul li span:nth-child(3) span:nth-child(2)"
+          ).innerText,
+          rating_stage: document.querySelector(".user-rank").innerText,
           success: true,
         };
       } else {
