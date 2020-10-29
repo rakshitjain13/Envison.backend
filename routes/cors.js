@@ -7,6 +7,7 @@ const whitelist = [
   "http://localhost:3000",
   "https://localhost:3443",
   "http://localhost:3001",
+  " https://envision-cp.herokuapp.com"
 ];
 var corsOptionsDelegate = (req, callback) => {
   var corsOptions;
