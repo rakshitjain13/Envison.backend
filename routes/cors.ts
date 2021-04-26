@@ -1,6 +1,8 @@
+import { Request } from "express";
+
 const express = require("express");
-const cors = require("cors");
-const app = express();
+const corsPack = require("cors");
+
 
 const whitelist = [
   "http://localhost:5000",
@@ -10,10 +12,9 @@ const whitelist = [
   "https://envision-cp.herokuapp.com",
   "https://envision-cp-visualizer.web.app"
 ];
-var corsOptionsDelegate = (req, callback) => {
+var corsOptionsDelegate = (req:Request, callback: (arg0: null, arg1: { origin: boolean; }) => void) => {
   var corsOptions;
-  console.log(req.header("Origin"));
-  if (whitelist.indexOf(req.header("Origin")) !== -1) {
+  if (whitelist.indexOf(req.header("Origin")!) !== -1) {
     corsOptions = { origin: true };
   } else {
     corsOptions = { origin: false };
@@ -21,5 +22,5 @@ var corsOptionsDelegate = (req, callback) => {
   callback(null, corsOptions);
 };
 
-exports.cors = cors();
-exports.corsWithOptions = cors(corsOptionsDelegate);
+exports.cors = corsPack();
+exports.corsWithOptions = corsPack(corsOptionsDelegate);

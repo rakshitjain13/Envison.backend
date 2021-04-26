@@ -1,7 +1,8 @@
+import { NextFunction ,Request,Response} from "express";
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var passport = require('passport');
 var mongoose = require('mongoose');
@@ -26,18 +27,18 @@ const connect = mongoose.connect(url, {
 });
 
 connect.then(
-  (db) => {
+  () => {
     console.log('Connected correctly to server');
-    updateallcontests();
-    setInterval(updateallcontests, 1800000);
-    updatecc();
-    setInterval(updatecc, 180000);
-    updatecf();
-    setInterval(updatecf, 180000);
-    updateleet();
-    setInterval(updateleet, 180000);
+    // updateallcontests();
+    // setInterval(updateallcontests, 1800000);
+    // updatecc();
+    // setInterval(updatecc, 180000);
+    // updatecf();
+    // setInterval(updatecf, 180000);
+    // updateleet();
+    // setInterval(updateleet, 180000);
   },
-  (err) => {
+  (err:Error) => {
     console.log(err);
   }
 );
@@ -64,19 +65,24 @@ app.use('/allcontests', require('./routes/allcontest'));
 
 // };
 // catch 404 and forward to error handler
-app.use(function (req, res, next) {
+app.use(function (req:Request, res:Response, next:NextFunction) {
   next(createError(404));
 });
 
 // error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+app.use(function (
+	err: any,
+	req: Request,
+	res: Response,
+	next: NextFunction
+) {
+	// set locals, only providing error in development
+	res.locals.message = err.message;
+	res.locals.error = req.app.get("env") === "development" ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+	// render the error page
+	res.status(err.status || 500);
+	res.render("error");
 });
 
 module.exports = app;
