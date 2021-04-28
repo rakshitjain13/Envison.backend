@@ -14,15 +14,15 @@ const codechefscrap = async (ccuser: string) => {
 			country_rank: res.data.country_rank,
 			status: res.data.status == "Success" ? true : false,
 		}))
-		.catch((err) => ({
-			name: undefined,
-			username: undefined,
-			stars: undefined,
-			rating: undefined,
-			contest_ratings: undefined,
-			highest_rating: undefined,
-			global_rank: undefined,
-			country_rank: undefined,
+		.catch((_err: any) => ({
+			name: "",
+			username: ccuser,
+			stars: "",
+			rating: "",
+			contest_ratings: [],
+			highest_rating: "",
+			global_rank: "",
+			country_rank: "",
 			status: false,
 		}));
 	return codechef_user;

@@ -8,9 +8,8 @@ var jwt = require("jsonwebtoken"); // used to create, sign, and verify tokens
 
 var config = require("./config");
 
-
 exports.getToken = function (user: any) {
-  return jwt.sign(user, config.secretKey, { expiresIn: 3600 });
+	return jwt.sign(user, config.secretKey, {});
 };
 
 var opts = {
@@ -19,18 +18,21 @@ var opts = {
 };
 
 exports.jwtPassport = passport.use(
-  new JwtStrategy(opts, (jwt_payload: { _id: any; }, done: (arg0: null, arg1: boolean) => any) => {
-    console.log("JWT payload: ", jwt_payload);
-    User.findOne({ _id: jwt_payload._id }, (err: any, user: any) => {
-      if (err) {
-        return done(err, false);
-      } else if (user) {
-        return done(null, user);
-      } else {
-        return done(null, false);
-      }
-    });
-  })
+	new JwtStrategy(
+		opts,
+		(jwt_payload: { _id: any }, done: (arg0: null, arg1: boolean) => any) => {
+			console.log("JWT payload: ", jwt_payload);
+			User.findOne({ _id: jwt_payload._id }, (err: any, user: any) => {
+				if (err) {
+					return done(err, false);
+				} else if (user) {
+					return done(null, user);
+				} else {
+					return done(null, false);
+				}
+			});
+		}
+	)
 );
 
 exports.verifyUser = passport.authenticate("jwt", { session: false });

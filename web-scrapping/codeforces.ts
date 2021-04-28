@@ -19,11 +19,11 @@ const codeforecesscrap = async (ccuser: string) => {
 			})
 		)
 		.catch((err) => ({
-			username: undefined,
-			rating: undefined,
-			maxRating: undefined,
-			rank: undefined,
-			contests: undefined,
+			username: ccuser,
+			rating: "",
+			maxRating: "",
+			rank: "",
+			contests: [],
 			status: false,
 		}));
 	return codeforces_user;
