@@ -34,6 +34,8 @@
     "@types/graphql": "^14.5.0",
     "@types/jsonwebtoken": "^8.5.1",
     "@types/node": "^14.14.41",
+    "clean-css": "^5.1.2",
+    "constantinople": "^4.0.1",
     "nodemon": "^2.0.7",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
